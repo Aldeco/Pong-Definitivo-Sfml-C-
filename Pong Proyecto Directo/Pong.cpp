@@ -1,5 +1,4 @@
 #include "config.hpp"
-#include "Paddle.hpp"
 #include "Pong.hpp"
 
 Pong::Pong()
@@ -39,7 +38,7 @@ void Pong::run()
 		// actualizo los elementos del juego
 		pad_player.updateHuman(tiempo);
 		pad_ia.update_bot(tiempo, bola);
-		bola.update(tiempo, pad_player.getGlobalBounds(), pad_ia.getGlobalBounds());
+		bola.update(tiempo, pad_player.getGlobalBounds(), pad_ia.getGlobalBounds(), puntos);
 
 		//ventana.clear(Color::Transparent);
 
@@ -47,6 +46,7 @@ void Pong::run()
 		ventana.draw(bola);
 		ventana.draw(pad_player);
 		ventana.draw(pad_ia);
+		puntos.show(ventana);
 		ventana.display();  //actualizo la ventana
 
 	}

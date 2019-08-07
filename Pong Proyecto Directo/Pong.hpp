@@ -6,6 +6,7 @@
 #include <SFML/Audio.hpp>
 #include "Bola.hpp"
 #include "Paddle.hpp"
+#include "Puntos.hpp"
 
 using namespace sf;
 
@@ -33,6 +34,7 @@ private:
 	Paddle pad_player;
 	Paddle pad_ia;
 
+	Puntos puntos;
 }; // clase pong
 
 #endif

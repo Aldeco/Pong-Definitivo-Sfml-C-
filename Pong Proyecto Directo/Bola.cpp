@@ -19,37 +19,39 @@ Bola::Bola() : Sprite()
 	this->speed.y = 300.0f;
 }
 
-void Bola::update(Time& delta, FloatRect& p1, FloatRect& p2)
+void Bola::update(sf::Time& delta, sf::FloatRect& p1, sf::FloatRect& p2, Puntos& puntos)
 {
-	// Obtengo los cuatro laterales de la bola (como si fuera un rectangulo)
+	// Obtenemos los cuatro laterales de la bola
 	float left = this->getPosition().x - this->getOrigin().x;
 	float right = this->getPosition().x + this->getOrigin().x;
 	float top = this->getPosition().y - this->getOrigin().y;
 	float bottom = this->getPosition().y + this->getOrigin().y;
 
-	// Compruebo si choca contra las paredes
+	// Comprobamos si choca contra las paredes
 	if (left <= 0 && speed.x < 0)
 	{
 		this->speed.x *= -1;
 		this->sound.play();
+		puntos.addPointIA();
 	}
 	if (right >= ancho && speed.x > 0)
 	{
 		this->speed.x *= -1;
 		this->sound.play();
+		puntos.addPointPlayer();
 	}
 	if ((top <= 0 && speed.y < 0) || (bottom >= alto && speed.y > 0))
 	{
 		this->speed.y *= -1;
 		this->sound.play();
 	}
-	// compruebo si ha chocado contra las palas
+	// Por último comprobamos si ha chocado contra las palas
 	if (this->getGlobalBounds().intersects(p1) || this->getGlobalBounds().intersects(p2))
 	{
 		this->speed.x *= -1;
 		this->sound.play();
 	}
-	// Muevo la bola multiplicando la velocidad por el tiempo pasado
+	// Movemos la bola multiplicando la velocidad por el tiempo pasado
 	this->move(delta.asSeconds() * this->speed.x, delta.asSeconds() * this->speed.y);
 }
 
